@@ -27,6 +27,11 @@ int lexer::gettok(FILE *f) {
                 IdentifierStr += LastChar;
             }
             fun_args.push_back(IdentifierStr);
+            LastChar = fgetc(f);
+            if (LastChar == ':') {
+                return_type.emplace_back("void");
+                return_var.emplace_back(" ");
+            }
             return tok_def;
         }
         if (IdentifierStr == "extern")
@@ -44,7 +49,6 @@ int lexer::gettok(FILE *f) {
                 IdentifierStr += LastChar;
             return_var.push_back(IdentifierStr);
         }
-
         return tok_identifier;
     }
 
