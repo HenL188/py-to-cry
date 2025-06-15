@@ -2,6 +2,7 @@
 #include <string>
 #include <fstream>
 #include "lexer.h"
+#include "writer.h"
 
 int main() {
     FILE *f = fopen("lex.txt", "r");
@@ -34,6 +35,7 @@ int main() {
     //     printf("%s\n", s.c_str());
     // }
 
+    writer::function_write(lex);
 
     fclose(f);
     return 0;

@@ -2,7 +2,8 @@
 #include <fstream>
 #include "lexer.h"
 class writer {
-    void function_write(lexer& lex);
+    public:
+  static void function_write(lexer& lex);
 };
 
 

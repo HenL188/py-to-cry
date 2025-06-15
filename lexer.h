@@ -1,5 +1,6 @@
 #pragma once
-
+#include <string>
+#include <vector>
 enum Token {
     tok_eof = -1,
 
@@ -30,8 +31,8 @@ enum Token {
 
 class lexer {
 public:
-    static std::string IdentifierStr;  // Buffer for identifiers
-    static double NumberVal;         // Holds numeric values
+    std::string IdentifierStr;  // Buffer for identifiers
+    double NumberVal;         // Holds numeric values
     std::vector<std::string> fun_name ,var_name,fun_args, return_type, return_var;
     int gettok(FILE* f);
 };

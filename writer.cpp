@@ -4,8 +4,10 @@ void writer::function_write(lexer &lex) {
     std::ofstream main("main.txt");
     if (!main.is_open())
         exit(1);
-    main << lex.return_type[0] << " " << lex.fun_name[0]<< "(" << lex.fun_args[0]
-    << ")" << " " << "{" << std::endl << "\t" << "return" << " "
-    << lex.return_var[0] << " " << "}" << std::endl;
+    for (int i = 0; i < lex.fun_name.size(); i++) {
+        main << lex.return_type[i] << " " << lex.fun_name[i]<< "(" << lex.fun_args[i]
+        << ")" << " " << "{" << std::endl << "\t" << "return" << " "
+        << lex.return_var[i] << ";" << " " << "}" << std::endl;
+    }
     main.close();
 }
