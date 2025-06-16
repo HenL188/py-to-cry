@@ -68,8 +68,9 @@ int lexer::gettok(FILE *f) {
             } while (isdigit(LastChar) || LastChar == '.');
             if (type_float == true) {
                 var_type.emplace_back("float");
+            }else {
+                var_type.emplace_back("int");
             }
-           var_type.emplace_back("int");
             var_value.push_back(NumStr);
         }
         LastChar = fgetc(f);
