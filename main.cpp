@@ -1,8 +1,9 @@
-#include <stdio.h>
+#include <cstdio>
 #include <string>
 #include <fstream>
 #include "lexer.h"
 #include "writer.h"
+#include <iostream>
 
 int main() {
     FILE *f = fopen("lex.txt", "r");
@@ -22,18 +23,17 @@ int main() {
         else
             printf("Token: %d\n", tok);
     }
-    // for (auto s : fun_name) {
-    //     printf("%s\n", s.c_str());
-    // }
-    // for (auto s : fun_args) {
-    //     printf("%s\n", s.c_str());
-    // }
-    // for (auto s : return_type) {
-    //     printf("%s\n", s.c_str());
-    // }
-    // for (auto s : return_var) {
-    //     printf("%s\n", s.c_str());
-    // }
+    for (auto s : lex.var_name) {
+        printf("var: %s\n", s.c_str());
+    }
+    if (lex.var_type.empty()) std::cout << "empty" << std::endl;
+    for (auto s : lex.var_type) {
+        printf("type: %s\n", s.c_str());
+    }
+
+    for (auto s : lex.var_value) {
+        printf("value: %s\n", s.c_str());
+    }
 
     writer::function_write(lex);
 

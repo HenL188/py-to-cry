@@ -1,7 +1,6 @@
 #include "lexer.h"
-#include <ctype.h>
-#include <stdlib.h>
-#include <stdio.h>
+#include <cctype>
+#include <cstdio>
 #include <string>
 
 int lexer::gettok(FILE *f) {
@@ -49,7 +48,32 @@ int lexer::gettok(FILE *f) {
                 IdentifierStr += LastChar;
             return_var.push_back(IdentifierStr);
         }
+        var_name.push_back(IdentifierStr);
         return tok_identifier;
+    }
+    if (LastChar == '=') {
+        LastChar = fgetc(f);
+        while (isspace(LastChar))
+            LastChar = fgetc(f);
+        printf("debug: %d\n", LastChar);
+        if (isdigit(LastChar) || LastChar == '.') {
+            bool type_float = false;
+            std::string NumStr; // Buffer for the number string
+            do {
+                NumStr += LastChar;
+                LastChar = fgetc(f);
+                if (LastChar == '.') {
+                    type_float = true;
+                }
+            } while (isdigit(LastChar) || LastChar == '.');
+            if (type_float == true) {
+                var_type.emplace_back("float");
+            }
+           var_type.emplace_back("int");
+            var_value.push_back(NumStr);
+        }
+        LastChar = fgetc(f);
+        return tok_equal;
     }
 
     // Number: [0-9.]+
@@ -118,4 +142,3 @@ int lexer::gettok(FILE *f) {
     LastChar = fgetc(f);
     return ThisChar;
 }
-

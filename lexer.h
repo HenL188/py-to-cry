@@ -17,22 +17,24 @@ enum Token {
     tok_right_paren = -7,
     tok_return = -12,
 
-    // Conditionals
-    tok_if = -13,
-    tok_elif = -14,
-    tok_else = -15,
-
     // Signs
     tok_plus = -8,
     tok_minus = -9,
     tok_mult = -10,
     tok_div = -11,
+
+    // Conditionals
+  tok_if = -13,
+  tok_elif = -14,
+  tok_else = -15,
+
+    tok_equal = -16,
 };
 
 class lexer {
 public:
     std::string IdentifierStr;  // Buffer for identifiers
     double NumberVal;         // Holds numeric values
-    std::vector<std::string> fun_name ,var_name,fun_args, return_type, return_var;
+    std::vector<std::string> fun_name ,var_name, var_type, var_value, fun_args, return_type, return_var;
     int gettok(FILE* f);
 };
