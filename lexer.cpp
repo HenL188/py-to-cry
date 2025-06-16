@@ -10,7 +10,7 @@ int lexer::gettok(FILE *f) {
         LastChar = fgetc(f);
 
     // Identifier: [a-zA-Z][a-zA-Z0-9]*
-    if (isalpha(LastChar)) {
+    if (isalpha(LastChar) || LastChar == '_') {
         IdentifierStr = LastChar; // Store the first character
         while (isalnum(LastChar = fgetc(f)))
             IdentifierStr += LastChar;
@@ -26,6 +26,7 @@ int lexer::gettok(FILE *f) {
                 IdentifierStr += LastChar;
             }
             fun_args.push_back(IdentifierStr);
+            IdentifierStr.clear();
             LastChar = fgetc(f);
             if (LastChar == ':') {
                 return_type.emplace_back("void");

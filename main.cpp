@@ -35,6 +35,14 @@ int main() {
         printf("value: %s\n", s.c_str());
     }
 
+    for (auto s : lex.fun_args) {
+        printf("value: %s\n", s.c_str());
+    }
+
+    std::cout << lex.var_name.size() << std::endl;
+    std::cout << lex.var_type.size() << std::endl;
+    std::cout << lex.var_value.size() << std::endl;
+
     writer::function_write(lex);
 
     fclose(f);
