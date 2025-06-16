@@ -73,6 +73,27 @@ int lexer::gettok(FILE *f) {
             }
             var_value.push_back(NumStr);
         }
+        // LastChar = fgetc(f);
+        switch (LastChar) {
+            case 34:
+                IdentifierStr = LastChar; // Store the first character
+                while (isalnum(LastChar = fgetc(f)))
+                    IdentifierStr += LastChar;
+                var_type.emplace_back("const char*");
+                IdentifierStr += 34;
+                var_value.push_back(IdentifierStr);
+                break;
+            case 39:
+                IdentifierStr = LastChar; // Store the first character
+                while (isalnum(LastChar = fgetc(f)))
+                    IdentifierStr += LastChar;
+                var_type.emplace_back("char");
+                IdentifierStr += 39;
+                var_value.push_back(IdentifierStr);
+                break;
+            default:
+                break;
+        }
         LastChar = fgetc(f);
         return tok_equal;
     }
