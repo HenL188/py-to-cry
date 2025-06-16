@@ -2,6 +2,7 @@
 #include <cctype>
 #include <cstdio>
 #include <string>
+#include <iostream>
 
 int lexer::gettok(FILE *f) {
     static int LastChar = ' ';
@@ -48,6 +49,7 @@ int lexer::gettok(FILE *f) {
             while (isalnum(LastChar = fgetc(f)))
                 IdentifierStr += LastChar;
             return_var.push_back(IdentifierStr);
+            return tok_return;
         }
         var_name.push_back(IdentifierStr);
         return tok_identifier;

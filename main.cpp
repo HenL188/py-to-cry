@@ -36,7 +36,7 @@ int main() {
     }
 
     for (auto s : lex.fun_args) {
-        printf("value: %s\n", s.c_str());
+        printf("args: %s\n", s.c_str());
     }
 
     std::cout << lex.var_name.size() << std::endl;
