@@ -22,6 +22,10 @@ void writer::function_write(lexer &lex) {
     }
     debug(lex);
     int j = 0;
+    for (int k = 0; k < lex.count[0]; k++) {
+        main << lex.var_type[j] << " " << lex.var_name[j] << " = " << lex.var_value[j] << ";" << std::endl;
+        j++;
+    }
     for (int i = 0; i < lex.fun_name.size(); i++) {
 
         if (lex.return_type[i] == "void") {
