@@ -44,7 +44,8 @@ int main() {
         std::cout << x.first << ":" << x.second << std::endl;
     }
 
-    writer::function_write(lex);
+    writer w;
+    w.function_write(lex);
 
     fclose(f);
     return 0;

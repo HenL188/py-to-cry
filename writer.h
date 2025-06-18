@@ -3,8 +3,12 @@
 #include "lexer.h"
 class writer {
     static void debug(lexer &lex);
+    void main_write(lexer &lex, int i, int j);
+    std::ofstream main;
+    int i;
     public:
-  static void function_write(lexer& lex);
+   void function_write(lexer& lex);
+    writer();
 };
 
 
