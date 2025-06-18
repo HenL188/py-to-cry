@@ -12,7 +12,7 @@ void writer::function_write(lexer &lex) {
         std::cerr << "Mismatch in function definition arrays sizes!" << std::endl;
         exit(1);
     }
-
+    int j = 0;
     for (int i = 0; i < lex.fun_name.size(); i++) {
         if (lex.return_type[i] == "void") {
             main << lex.return_type[i] << " " << lex.fun_name[i] << "(" << lex.fun_args[i] << ") {" << std::endl;
@@ -20,11 +20,9 @@ void writer::function_write(lexer &lex) {
                 std::cerr << "Mismatch in variable arrays sizes!" << std::endl;
                 exit(1);
             }
-            for (int j = 0; j < lex.var_name.size();) {
+            for (int k = 0; k < lex.count[i + 1]; k++) {
                 main << "\t" << lex.var_type[j] << " " << lex.var_name[j] << " = " << lex.var_value[j] << ";" << std::endl;
-                lex.var_name.erase(lex.var_name.begin() + j);
-                lex.var_type.erase(lex.var_type.begin() + j);
-                lex.var_value.erase(lex.var_value.begin() + j);
+                j++;
             }
             main << "}" << std::endl;
         } else {
