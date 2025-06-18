@@ -1,6 +1,7 @@
 #pragma once
 #include <string>
 #include <vector>
+#include <unordered_map>
 enum Token {
     tok_eof = -1,
 
@@ -36,5 +37,8 @@ public:
     std::string IdentifierStr;  // Buffer for identifiers
     double NumberVal;         // Holds numeric values
     std::vector<std::string> fun_name ,var_name, var_type, var_value, fun_args, return_type, return_var;
+    std::unordered_map<int, unsigned long long> count;
+    int func_count , var_count;
+    lexer();
     int gettok(FILE* f);
 };

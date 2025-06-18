@@ -4,6 +4,11 @@
 #include <string>
 #include <iostream>
 
+lexer::lexer() {
+    func_count = 0;
+    var_count = 0;
+}
+
 int lexer::gettok(FILE *f) {
     static int LastChar = ' ';
 
@@ -16,6 +21,8 @@ int lexer::gettok(FILE *f) {
         while (isalnum(LastChar = fgetc(f)))
             IdentifierStr += LastChar;
         if (IdentifierStr == "def") {
+            if (var_count > 0) var_count = 0;
+            func_count += 1;
             LastChar = fgetc(f);
             IdentifierStr = LastChar;
             while (isalnum(LastChar = fgetc(f)))
@@ -34,7 +41,7 @@ int lexer::gettok(FILE *f) {
                 return_var.emplace_back(" ");
             }
             return tok_def;
-        }
+            }
         if (IdentifierStr == "extern")
             return tok_extern;
         if (IdentifierStr == "if")
@@ -52,13 +59,15 @@ int lexer::gettok(FILE *f) {
             return tok_return;
         }
         var_name.push_back(IdentifierStr);
+        var_count += 1;
+        if (func_count == 0) count[0] = var_count;
+        if (func_count > 0) count[func_count] = var_count;
         return tok_identifier;
     }
     if (LastChar == '=') {
         LastChar = fgetc(f);
         while (isspace(LastChar))
             LastChar = fgetc(f);
-        printf("debug: %d\n", LastChar);
         if (isdigit(LastChar) || LastChar == '.') {
             bool type_float = false;
             std::string NumStr; // Buffer for the number string
